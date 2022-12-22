@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Список стран</title>
+</head>
+<body>
+<header>
+   <a href="/"> Домой </a>/<a href="/countries-list/page=1"> Список стран </a>
+</header>
+{% for letter in abc %}
+    <a href="/countries/{{ letter }}">{{ letter }}</a>
+{% endfor %}
+<br>
+
+<h2>Список стран</h2>
+
+<ol start="{{ start }}">
+    {% for this_country in country_by_page %}
+    <a href="/country/{{ this_country.country }}"><li>{{ this_country.country }}</li></a>
+    {% endfor %}
+</ol>
+
+{% for p in page_range %}
+    {% if pg.number == p %}
+        <span>{{ p }}</span>&nbsp &nbsp
+    {% elif p >= pg.number|add:-2 and p <= pg.number|add:2 %}
+        <a href="/countries-list/page={{ p }}">{{ p }}</a>&nbsp &nbsp
+    {% endif %}
+{% endfor %}
+<a href="/countries-list/page={{ counter }}">{{ counter }}</a>
+</body>
+</html>
